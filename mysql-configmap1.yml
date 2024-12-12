@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: mysql
+spec:
+ selector:
+   matchLabels:
+     app: mysql
+ template:
+   metadata:
+     labels:
+       app: mysql
+   spec:
+     containers:
+     - image: mysql:5.7
+       name: mysql
+       env:
+         # Define the environment variable
+         - name: MYSQL_ROOT_PASSWORD # Docker Image ENV
+           valueFrom:
+             configMapKeyRef:
+               name: mycreddb # configmap name
+               # Specify the key associated with the value
+               key: MYSQL_ROOT_PASSWORD
+         - name: MYSQL_USER # Docker Image ENV
+           valueFrom:
+             configMapKeyRef:
+               name: mycreddb # configmap name
+               # Specify the key associated with the value
+               key: MYSQL_USER
+         - name: MYSQL_PASSWORD # Docker Image ENV
+           valueFrom:
+             configMapKeyRef:
+               name: mycreddb # configmap name
+               # Specify the key associated with the value
+               key: MYSQL_PASSWORD
+#this method will use to keep database credentials safe from developers who uses git to access this file.

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx1
+  labels:
+    app: tushartest
+    environment: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      environment: frontend
+  template:
+    metadata:
+      labels:
+        environment: frontend
+    spec:
+      containers:
+      - name: nginx1
+        image: nginx
+      nodeSelector:
+        hardware: lowspec

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx4
+  labels:
+    environment: dev
+spec:
+  containers:
+  - name: nginx4
+    image: nginx
+  nodeSelector:
+    hardware: lowspec

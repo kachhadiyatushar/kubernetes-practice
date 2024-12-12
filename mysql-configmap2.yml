@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: mysql
+spec:
+ selector:
+   matchLabels:
+     app: mysql
+ template:
+   metadata:
+     labels:
+       app: mysql
+   spec:
+     containers:
+     - image: mysql:5.7
+       name: mysql
+       envFrom:
+       - configMapRef:
+           name: mycreddb
+
+#this method will use to keep file format short to avoid multiple defining variables of database. It will use all values defined in configmap.
